@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <string.h>
-#include "libft.h"
+#include "../includes/libft.h"
 
 char	*ft_newstr (size_t size)
 {

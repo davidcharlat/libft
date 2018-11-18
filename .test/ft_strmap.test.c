@@ -13,10 +13,15 @@ int		main (void)
 		c++;
 		return (c);
 	}
+	
 	ptr = ft_strmap (NULL, &nextchar);
+		free (ptr);
 	ptr = ft_strmap (s, &nextchar);
 	if (strcmp (ptr, "kjpq"))
+	{
+		free (ptr);
 		return (1);
+	}
 	free (ptr);
 	printf ("ft_strmap OK\n");
 	return (0);

@@ -22,7 +22,10 @@ int		main (void)
 	while (i <= 100)
 	{
 		if (ptr[i++])
+		{
+			free (ptr);
 			return (i);
+		}
 	}
 	i = 0;
 	while (i < 10)
@@ -31,7 +34,10 @@ int		main (void)
 		i++;
 	}
 	if (strcmp (ptr, "abcdefghij"))
+		{
+		free (ptr);
 		return (101);
+		}
 	free (ptr);
 	printf ("ft_newstr OK\n");
 	return (0);

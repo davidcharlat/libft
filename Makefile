@@ -1,6 +1,10 @@
 NAME = libft.a
 
-SRCPATH = ./
+SRCPATH = ./src/
+
+ODIR = ./bin/
+
+TESTDIR = ./.test/
 
 SRCFILES =	ft_memset.c \
 			ft_bzero.c \
@@ -37,20 +41,32 @@ SRCFILES =	ft_memset.c \
 			ft_striter.c \
 			ft_striteri.c \
 			ft_strmap.c \
-			ft_strmapi.c 
+			ft_strmapi.c \
+			ft_strequ.c \
+			ft_strnequ.c \
+			ft_strsub.c \
+			ft_strjoin.c \
+			ft_strtrim.c \
+			ft_strsplit.c \
+			ft_itoa.c \
 			
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -O3
 
-OBJS = $(SRCFILES:.c=.o)
+OBJS = $(addprefix $(ODIR), $(SRCFILES:.c=.o))
+
+TESTFILE = $(addprefix $(TESTDIR), $(SRCFILES:.c=.test.c)) 
+TESTBIN = $(addprefix $(SRCPATH), $(SRCFILES:.c=.out))
+
+vpath %.c src/
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	ar rc $(NAME) $(OBJS)
 	ranlib $(NAME)
-	
-$(OBJS):
-	gcc -c $(FLAGS) $(SRCFILES)
+
+$(ODIR)%.o: %.c
+	gcc $(FLAGS) -c $< -o $@
 	
 clean:
 	rm -f $(OBJS)
@@ -59,3 +75,14 @@ fclean: clean
 	rm -f $(NAME)
 	
 re: fclean all
+
+testft: $(TESTBIN)
+
+$(TESTBIN): $(TESTFILE) lasttest $(NAME)
+	gcc $(FLAGS) -L -lft $@ $< 
+	./$@
+	rm $@
+	lasttest
+
+lasttest:
+	touch $(TESTDIR)last
