@@ -49,6 +49,14 @@ SRCFILES =	ft_memset.c \
 			ft_strtrim.c \
 			ft_strsplit.c \
 			ft_itoa.c \
+			ft_putchar.c \
+			ft_putstr.c \
+			ft_putendl.c \
+			ft_putnbr.c \
+			ft_putchar_fd.c \
+			ft_putstr_fd.c \
+			ft_putendl_fd.c \
+			ft_putnbr_fd.c 
 			
 FLAGS = -Wall -Wextra -Werror -O3
 
@@ -76,13 +84,15 @@ fclean: clean
 	
 re: fclean all
 
-testft: $(TESTBIN)
-
-$(TESTBIN): $(TESTFILE) lasttest $(NAME)
-	gcc $(FLAGS) -L -lft $@ $< 
-	./$@
-	rm $@
-	lasttest
-
-lasttest:
-	touch $(TESTDIR)last
+#testft: $(TESTBIN)
+#
+#$(TESTBIN): $(TESTFILE)
+#
+#$(TESTFILE): $(addprefix $(SCRPATH), $(SRCFILES)) $(TESTDIR)last $(NAME)
+#	gcc $(FLAGS) -o a.out -L -lft ./includes/libft.h $@ 
+#	./a.out
+#	rm a.out
+#	touch $(TESTDIR)last
+#	
+#$(TESTDIR)last:
+#	touch $(TESTDIR)last
