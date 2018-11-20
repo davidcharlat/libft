@@ -9,5 +9,5 @@ void		ft_putendl(char const *s)
 		write(1, s, 1);
 		s++;
 	}
-	write (1,"\n",1);
+	(void)write (1,"\n",1);
 }

@@ -81,3 +81,39 @@ do
 	echo  "$file OK"
 	echo "->"
 done
+for file in 'ft_lstnew'
+do
+	gcc -o testa -Wall -Wextra -Werror $file.test.c ../src/$file.c ../src/ft_memcpy.c
+	./testa
+	echo "->"
+done
+for file in 'ft_lstdel'
+do
+	gcc -o testa -Wall -Wextra -Werror $file.test.c ../src/$file.c ../src/ft_memcpy.c ../src/ft_lstnew.c
+	OUTPUT=$(./testa);
+	if [ "$OUTPUT" != "delone delone " ] && [ "$OUTPUT" != "delone delone delone " ]
+	then
+		errorExit "error: received '$OUTPUT'"
+	fi
+	echo  "$file OK"
+	echo "->"
+done
+for file in 'ft_lstiter'
+do
+	gcc -o testa -Wall -Wextra -Werror $file.test.c ../src/$file.c ../src/ft_memcpy.c ../src/ft_lstnew.c
+	OUTPUT="`./testa`";
+	if [ "$OUTPUT" != "->
+$file OK" ]
+	then
+		errorExit "error: received '$OUTPUT'"
+	fi
+	echo  "$file OK"
+	echo "->"
+done
+for file in 'ft_lstdelone' 'ft_lstadd' 'ft_lstmap'
+do
+	gcc -o testa -Wall -Wextra -Werror $file.test.c ../src/$file.c ../src/ft_memcpy.c ../src/ft_lstnew.c
+	./testa
+	echo "->"
+done
+rm ./testa
