@@ -4,7 +4,7 @@ errorExit()
   exit 1;
 }
 
-#cd ./.test
+cd ./.test
 
 for file in 'ft_newstr'
 do
