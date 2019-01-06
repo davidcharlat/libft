@@ -1,6 +1,6 @@
+#include "../includes/get_next_line_with_lenght.h"
 #include <stdlib.h>
 #include <unistd.h>
-#include "../includes/get_next_line.h"
 
 static t_read		*ft_freeread(t_read *red, t_read *prev, t_read **start)
 {
@@ -97,7 +97,7 @@ static int			ft_findendl(int fd, t_read *red)
 	return (size);
 }
 
-int					get_next_line(int fd, char **line)
+int					get_next_line_with_lenght(int fd, char **line, int *lenght)
 {
 	static t_read	*start = NULL;
 	t_read			*red;
@@ -122,5 +122,6 @@ int					get_next_line(int fd, char **line)
 		return (-1);
 	tab[0] = red;
 	tab[1] = prevtmp;
-	return (ft_print(ft_findendl(fd, red), tab, &start, line));
+	*lenght = ft_findendl(fd, red);
+	return (ft_print(*lenght, tab, &start, line));
 }
